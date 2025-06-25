@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { WeatherStation } from './weather-station.entity';
 
 @Injectable()
-export class WeatherStationsService {
+export class WeatherStationService {
   constructor(
     @InjectRepository(WeatherStation)
     private weatherStationsRepository: Repository<WeatherStation>,

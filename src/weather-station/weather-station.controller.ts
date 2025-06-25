@@ -1,11 +1,9 @@
 import { Controller, Get } from '@nestjs/common';
-import { WeatherStationsService } from './weather-station.service';
+import { WeatherStationService } from './weather-station.service';
 
-@Controller('weather-stations')
-export class WeatherStationsController {
-  constructor(
-    private readonly weatherStationsService: WeatherStationsService,
-  ) {}
+@Controller('weather-station')
+export class WeatherStationController {
+  constructor(private readonly weatherStationsService: WeatherStationService) {}
 
   @Get()
   findAll() {

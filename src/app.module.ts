@@ -5,7 +5,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { getDatabaseConfig } from './database/database.config';
 import { DatabaseModule } from './database/database.module';
-import { WeatherStationsModule } from './weather-station/weather-station.module';
+import { WeatherStationModule } from './weather-station/weather-station.module';
 
 @Module({
   imports: [
@@ -18,7 +18,7 @@ import { WeatherStationsModule } from './weather-station/weather-station.module'
       useFactory: getDatabaseConfig,
       inject: [ConfigService],
     }),
-    WeatherStationsModule,
+    WeatherStationModule,
   ],
   controllers: [AppController],
   providers: [AppService],
