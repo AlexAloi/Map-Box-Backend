@@ -1,3 +1,4 @@
+import { Measurement } from 'src/measurement/measurement.entity';
 import { Variable } from 'src/variable/variable.entity';
 import { Column, Entity, OneToMany, PrimaryColumn } from 'typeorm';
 
@@ -40,4 +41,7 @@ export class WeatherStation {
 
   @OneToMany(() => Variable, (variable) => variable.weatherStation)
   variables: Variable[];
+
+  @OneToMany(() => Measurement, (measurement) => measurement.weatherStation)
+  measurements: Measurement[];
 }

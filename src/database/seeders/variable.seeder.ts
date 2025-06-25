@@ -1,4 +1,3 @@
-// src/database/seeders/variable.seeder.ts
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as csv from 'csv-parser';
@@ -15,9 +14,8 @@ export class VariableSeeder {
   ) {}
 
   async seedFromCsv(): Promise<void> {
-    // Create table if it doesn't exist
     await this.variableRepository.query(`
-      CREATE TABLE IF NOT EXISTS variables (
+      CREATE TABLE IF NOT EXISTS variable (
         id INT PRIMARY KEY,
         weather_station_id INT NOT NULL,
         name VARCHAR(100) NOT NULL,

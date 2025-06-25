@@ -1,8 +1,15 @@
-// src/entities/variable.entity.ts
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
+import { Measurement } from 'src/measurement/measurement.entity';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  PrimaryColumn,
+} from 'typeorm';
 import { WeatherStation } from '../weather-station/weather-station.entity';
 
-@Entity('variables')
+@Entity('variable')
 export class Variable {
   @PrimaryColumn()
   id: number;
@@ -19,7 +26,8 @@ export class Variable {
   @Column({ name: 'long_name', length: 255 })
   longName: string;
 
-  // Foreign key relationship
+  @OneToMany(() => Measurement, (measurement) => measurement.weatherStation)
+  measurements: Measurement[];
   @ManyToOne(() => WeatherStation, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'weather_station_id' })
   weatherStation: WeatherStation;

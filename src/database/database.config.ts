@@ -12,10 +12,10 @@ export const getDatabaseConfig = (
     password: configService.get('DB_PASSWORD'),
     database: configService.get('DB_DATABASE'),
     entities: [__dirname + '/../**/*.entity{.ts,.js}'],
-    synchronize: false, // Important: Set to false for production databases
+    synchronize: false,
     ssl: false,
     extra: {
-      connectionLimit: 10, // Limit connections for serverless
+      connectionLimit: 10,
     },
     supportBigNumbers: true,
     bigNumberStrings: false,
