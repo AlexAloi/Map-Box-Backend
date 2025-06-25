@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { Variable } from 'src/variable/variable.entity';
+import { Column, Entity, OneToMany, PrimaryColumn } from 'typeorm';
 
 export enum State {
   NSW = 'NSW',
@@ -16,8 +17,8 @@ export class WeatherStation {
   @PrimaryColumn()
   id: number;
 
-  @Column({ name: 'ws_name', length: 255 })
-  wsName: string;
+  @Column({ name: 'weather_station_name', length: 255 })
+  weatherStationName: string;
 
   @Column({ length: 255 })
   site: string;
@@ -36,4 +37,7 @@ export class WeatherStation {
 
   @Column({ type: 'decimal', precision: 10, scale: 6 })
   longitude: number;
+
+  @OneToMany(() => Variable, (variable) => variable.weatherStation)
+  variables: Variable[];
 }

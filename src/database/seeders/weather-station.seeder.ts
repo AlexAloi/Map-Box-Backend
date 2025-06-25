@@ -20,7 +20,7 @@ export class WeatherStationSeeder {
     await this.weatherStationRepository.query(`
       CREATE TABLE IF NOT EXISTS weather_station (
         id INT PRIMARY KEY,
-        ws_name VARCHAR(255) NOT NULL,
+        weather_station_name VARCHAR(255) NOT NULL,
         site VARCHAR(255) NOT NULL,
         portfolio VARCHAR(255) NOT NULL,
         state ENUM('NSW','VIC','QLD','SA','WA','TAS','NT','ACT') NOT NULL,
@@ -41,13 +41,13 @@ export class WeatherStationSeeder {
         .on('data', (row) => {
           weatherStations.push({
             id: parseInt(row.id),
-            wsName: row.ws_name,
+            weatherStationName: row.weather_station_name,
             site: row.site,
             portfolio: row.portfolio,
             state: row.state as State,
             latitude: parseFloat(row.latitude),
             longitude: parseFloat(row.longitude),
-          });
+          } as WeatherStation);
         })
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
         .on('end', async () => {
