@@ -3,10 +3,13 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { getDatabaseConfig } from './config/database.config';
+import { getDatabaseConfig } from './database/database.config';
+import { DatabaseModule } from './database/database.module';
+import { WeatherStationsModule } from './weather-station/weather-station.module';
 
 @Module({
   imports: [
+    DatabaseModule,
     ConfigModule.forRoot({
       isGlobal: true,
     }),
@@ -15,6 +18,7 @@ import { getDatabaseConfig } from './config/database.config';
       useFactory: getDatabaseConfig,
       inject: [ConfigService],
     }),
+    WeatherStationsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
