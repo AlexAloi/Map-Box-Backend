@@ -20,6 +20,7 @@ export class MeasurementSeeder {
   ) {}
 
   async seedFromCsvFolder(): Promise<void> {
+    await this.measurementRepository.query('drop table measurement');
     await this.measurementRepository.query(`
       CREATE TABLE IF NOT EXISTS measurement (
         id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
@@ -88,7 +89,8 @@ export class MeasurementSeeder {
                 measurements.push(
                   this.measurementRepository.create({
                     weatherStation,
-                    variableName: variable,
+
+                    variable,
                     timestamp,
                     value,
                   }),
@@ -103,7 +105,7 @@ export class MeasurementSeeder {
             await Promise.all(pendingInserts);
             await this.measurementRepository.upsert(measurements, [
               'weatherStation',
-              'variableName',
+              'variable',
               'timestamp',
             ]);
             console.log(

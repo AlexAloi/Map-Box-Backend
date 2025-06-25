@@ -26,7 +26,7 @@ export class Variable {
   @Column({ name: 'long_name', length: 255 })
   longName: string;
 
-  @OneToMany(() => Measurement, (measurement) => measurement.weatherStation)
+  @OneToMany(() => Measurement, (measurement) => measurement.variable)
   measurements: Measurement[];
   @ManyToOne(() => WeatherStation, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'weather_station_id' })

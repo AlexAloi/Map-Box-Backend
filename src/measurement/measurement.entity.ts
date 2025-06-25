@@ -12,9 +12,9 @@ import {
 } from 'typeorm';
 
 @Entity('measurement')
-@Unique('unique_measurement', ['weatherStation', 'variableName', 'timestamp'])
+@Unique('unique_measurement', ['weatherStation', 'variable', 'timestamp'])
 export class Measurement {
-  @PrimaryGeneratedColumn('increment', { type: 'bigint' })
+  @PrimaryGeneratedColumn('increment')
   id: number;
 
   @ManyToOne(() => WeatherStation, (station) => station.measurements, {
@@ -27,12 +27,18 @@ export class Measurement {
   @Index('idx_station_time')
   weatherStation: WeatherStation;
 
+  @Column({ name: 'weather_station_id' })
+  weatherStationId: number;
+
+  @Column({ name: 'variable_name' })
+  variableName: string;
+
   @ManyToOne(() => Variable, (variable) => variable.measurements, {
     onDelete: 'CASCADE',
   })
   @JoinColumn({ name: 'variable_name', referencedColumnName: 'name' })
   @Index('idx_variable_time')
-  variableName: Variable;
+  variable: Variable;
 
   @Column({ type: 'datetime' })
   @Index('idx_station_time')

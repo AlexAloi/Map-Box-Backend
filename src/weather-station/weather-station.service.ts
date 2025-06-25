@@ -15,4 +15,10 @@ export class WeatherStationService {
       order: { id: 'ASC' },
     });
   }
+
+  async getAllWeatherStationsWithData() {
+    return this.weatherStationsRepository.find({
+      relations: ['measurements', 'measurements.variable', 'variables'],
+    });
+  }
 }

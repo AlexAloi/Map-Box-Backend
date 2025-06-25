@@ -9,4 +9,9 @@ export class WeatherStationController {
   findAll() {
     return this.weatherStationsService.findAll();
   }
+
+  @Get('stations')
+  async getAllStationsWithData() {
+    return this.weatherStationsService.getAllWeatherStationsWithData();
+  }
 }
